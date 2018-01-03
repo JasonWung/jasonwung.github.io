@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-03T21:46:58+08:00</updated>
+  <updated>2018-01-03T21:59:35+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
     <name>JasonWung&#39;s Blog</name>
   </author>
   <entry>
-    <title>简洁的静态博客构建工具 —— 纸小墨（InkPaper）</title>
-    <updated>2016-07-11T17:00:00+08:00</updated>
-    <id>tag:www.jasonwung.com,2016-07-11:/ink-blog-tool.html</id>
-    <content type="html">&lt;p&gt;纸小墨（InkPaper）是一个GO语言编写的开源静态博客构建工具，可以快速搭建博客网站。它无依赖跨平台，配置简单构建快速，注重简洁易用与更优雅的排版。&lt;/p&gt;&#xA;</content>
-    <link href="http://www.jasonwung.com/ink-blog-tool.html"></link>
-    <author>
-      <name>JasonWung</name>
-    </author>
-  </entry>
-  <entry>
-    <title>An Elegant Static Blog Generator —— InkPaper</title>
-    <updated>2016-07-11T17:00:00+08:00</updated>
-    <id>tag:www.jasonwung.com,2016-07-11:/ink-blog-tool-en.html</id>
-    <content type="html">&lt;p&gt;InkPaper is an static blog generator developed by Golang, No dependencies, Cross platform, Easy use, Fast build, Elegant theme.&lt;/p&gt;&#xA;</content>
-    <link href="http://www.jasonwung.com/ink-blog-tool-en.html"></link>
-    <author>
-      <name>JasonWung</name>
-    </author>
+    <title>2017-2018</title>
+    <updated>2018-01-03T21:51:00+08:00</updated>
+    <id>tag:www.jasonwung.com,2018-01-03:/2017-2018.html</id>
+    <content type="html"></content>
+    <link href="http://www.jasonwung.com/2017-2018.html"></link>
   </entry>
 </feed>
