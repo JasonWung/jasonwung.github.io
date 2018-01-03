@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-03T21:59:35+08:00</updated>
+  <updated>2018-01-03T22:22:17+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
@@ -11,7 +11,7 @@
     <title>2017-2018</title>
     <updated>2018-01-03T21:51:00+08:00</updated>
     <id>tag:www.jasonwung.com,2018-01-03:/2017-2018.html</id>
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;true&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/2017-2018.html"></link>
   </entry>
 </feed>
