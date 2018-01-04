@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Fe,">
-        <meta name="description" content="fis3上传错误">
+        <meta name="keywords" content="C,">
+        <meta name="description" content="链表的逆置">
         <meta name="author" content="">
-        <title>fis3上传错误</title>
+        <title>链表的逆置</title>
     </head>
     <body>
         <article class="container">
@@ -65,43 +65,97 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">fis3上传错误</h1>
+                <h1 class="title">链表的逆置</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1500960000"><span class="from"></span></span>
+                    <span class="date" data-time="1460447040"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Fe/index.html">Fe</a></span>
+                    <span class="tags"><a class="tag" href="/tag/C/index.html">C</a></span>
                 </section>
-                <article class="content"><p>在工作中开发，用fis3的上传工具，今天在上传过程中产生了一个错误，google之后和我遇到的情况不太一样，我这个情况有点特殊，可能之后有朋友可能会遇到，所以记录下来。</p>
+                <article class="content"><p>创建单链表并逆置</p>
 
-<pre><code>/usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228
-        throw new Error(error.errmsg || error);
-        ^
-Error: upload file [/actions/activity/v1/AcceptInvite.php] to [/home/homework/app/course] by receiver [http://test37.zuoyebang.cc/fisreceiver.php] error [500]
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228:19
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:26:11
-at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/fis3/lib/util.js:1263:11)
-at emitNone (events.js:91:20)
-at IncomingMessage.emit (events.js:185:7)
-at endReadableNT (_stream_readable.js:974:12)
-at _combinedTickCallback (internal/process/next_tick.js:80:11)
-at process._tickCallback (internal/process/next_tick.js:104:9)
+<pre><code>//
+//  main.c
+//  newline
+//
+//  Created by Jason on 16/4/12.
+//  Copyright © 2016年 jason. All rights reserved.
+//
+
+#include &lt;stdio.h&gt;
+#include &quot;stdlib.h&quot;
+#define NULL 0
+
+struct node{
+    int data;
+    struct node *next;
+};
+struct node*create(struct node *L){
+   
+    int x, flg = 1;
+    struct node *p, *s;
+    L=(struct node *)malloc(sizeof(struct node)); //生成头结点
+    L-&gt;next = NULL;
+    p=L;
+    while(flg)    //循环接受输入节点数据，0结束输入
+    {
+        printf(&quot;请输入节点数据\n&quot;);
+        scanf(&quot;%d&quot;, &amp;x);
+        if(x != 0)
+        {
+            s=(struct node *)malloc(sizeof(struct node)); //生成新节点
+            s-&gt;data = x;
+            p-&gt;next = s;        //把新节点插入链表尾部
+            p = s;              //p指针再次指向尾节点
+        }
+        else
+        {
+            flg = 0;    //输入0，改变循环变量，不接受新节点
+        }
+        
+    }
+    p-&gt;next = NULL;
+    
+    puts(&quot;链表输入结束\n&quot;);
+    
+    return L;
+}
+void print_node(struct node *head){
+    struct node *tmp;
+    tmp = head-&gt;next;
+    while (tmp != NULL) {
+        printf(&quot;%d  &quot;, tmp-&gt;data);
+        tmp = tmp-&gt;next;
+    }
+}
+void reverse_node(struct node *head){
+    struct node *p1,*p2;
+    p1 = head-&gt;next;
+    head-&gt;next = NULL;
+    while (p1 != NULL) {
+        p2 = p1;
+        p1 = p1-&gt;next;
+        p2-&gt;next = head-&gt;next;
+        head-&gt;next = p2;
+    }
+
+}
+int main(int argc, const char * argv[]) {
+    
+    struct node *head;
+    head = NULL;
+    head=create(head);/*创建单链表*/
+    puts(&quot;\n所有链表:\n&quot;);
+    print_node(head);
+    puts(&quot;\n&quot;);
+    puts(&quot;链表逆置:\n&quot;);
+    reverse_node(head);
+    print_node(head);
+    return 0;
+}
 </code></pre>
-
-<p>遇到这个问题，http 提示状态码 是 500 ，这块首先看看服务器接收文件有没有问题，检查上传文件是否可访问，检查被上传文件目录是否有权限，如果这些都没问题，你可能遇到了和我同样的问题（这种概率不大</p>
-
-<pre><code>curl http://test.***.cc/fisreceiver.php
-I'm ready for that, you know.
-</code></pre>
-
-<p>反馈是正常的，所以应该不是程序的问题，然后我去检查nginx的日志，发现没有日志，这就很奇怪了。</p>
-
-<pre><code>df -h 
-</code></pre>
-
-<p>看了一下文件系统，满了。。。找到问题的关键了，所以遇到我得这种情况的概率很低，但是如果有朋友遇到这种情况，不妨考虑一下我这个解决思路。</p>
 </article>
                 <section class="author">
                     
@@ -110,16 +164,11 @@ I'm ready for that, you know.
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
+                    <section class="nav prev">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/dns%e5%be%aa%e7%8e%af%e5%a4%8d%e7%94%a8.html">DNS循环复用</a>
+                        <a class="link" href="/date%e5%87%bd%e6%95%b0%e8%af%a6%e8%a7%a3.html">date函数详解</a>
                     </section>
                     
-                    
-                    <section class="nav next more">
-                        <div class="head">下篇文章</div>
-                        <a class="link" href="/phpinfo%e4%b8%ad%e5%ad%98%e5%9c%a8cli%e6%a8%a1%e5%bc%8f%e4%b8%8b%e4%b8%8d%e5%ad%98%e5%9c%a8%e7%9a%84%e6%a8%a1%e5%9d%97.html">php -m 不存在的模块，phpinfo中存在</a>
-                    </section>
                     
                 </section>
                 

@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Fe,">
-        <meta name="description" content="fis3上传错误">
+        <meta name="keywords" content="PHP,">
+        <meta name="description" content="date函数详解">
         <meta name="author" content="">
-        <title>fis3上传错误</title>
+        <title>date函数详解</title>
     </head>
     <body>
         <article class="container">
@@ -65,43 +65,72 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">fis3上传错误</h1>
+                <h1 class="title">date函数详解</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1500960000"><span class="from"></span></span>
+                    <span class="date" data-time="1460535720"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Fe/index.html">Fe</a></span>
+                    <span class="tags"><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
                 </section>
-                <article class="content"><p>在工作中开发，用fis3的上传工具，今天在上传过程中产生了一个错误，google之后和我遇到的情况不太一样，我这个情况有点特殊，可能之后有朋友可能会遇到，所以记录下来。</p>
+                <article class="content"><p>一、带零
+echo date(&lsquo;Y-m-d&rsquo;);</p>
 
-<pre><code>/usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228
-        throw new Error(error.errmsg || error);
-        ^
-Error: upload file [/actions/activity/v1/AcceptInvite.php] to [/home/homework/app/course] by receiver [http://test37.zuoyebang.cc/fisreceiver.php] error [500]
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228:19
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:26:11
-at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/fis3/lib/util.js:1263:11)
-at emitNone (events.js:91:20)
-at IncomingMessage.emit (events.js:185:7)
-at endReadableNT (_stream_readable.js:974:12)
-at _combinedTickCallback (internal/process/next_tick.js:80:11)
-at process._tickCallback (internal/process/next_tick.js:104:9)
-</code></pre>
+<p>2012-08-08</p>
 
-<p>遇到这个问题，http 提示状态码 是 500 ，这块首先看看服务器接收文件有没有问题，检查上传文件是否可访问，检查被上传文件目录是否有权限，如果这些都没问题，你可能遇到了和我同样的问题（这种概率不大</p>
+<p>二、不带零
+echo date(&lsquo;Y-n-j&rsquo;);</p>
 
-<pre><code>curl http://test.***.cc/fisreceiver.php
-I'm ready for that, you know.
-</code></pre>
+<p>2012-8-8</p>
 
-<p>反馈是正常的，所以应该不是程序的问题，然后我去检查nginx的日志，发现没有日志，这就很奇怪了。</p>
+<p>以下为参数详解（转载）：</p>
 
-<pre><code>df -h 
-</code></pre>
+<p>a - &ldquo;am&rdquo; 或是 &ldquo;pm&rdquo;</p>
 
-<p>看了一下文件系统，满了。。。找到问题的关键了，所以遇到我得这种情况的概率很低，但是如果有朋友遇到这种情况，不妨考虑一下我这个解决思路。</p>
+<p>A - &ldquo;AM&rdquo; 或是 &ldquo;PM&rdquo;</p>
+
+<p>d - 几日，二位数字，若不足二位则前面补零; 如: &ldquo;01&rdquo; 至 &ldquo;31&rdquo;</p>
+
+<p>D - 星期几，三个英文字母; 如: &ldquo;Fri&rdquo;</p>
+
+<p>F - 月份，英文全名; 如: &ldquo;January&rdquo;</p>
+
+<p>h - 12 小时制的小时; 如: &ldquo;01&rdquo; 至 &ldquo;12&rdquo;</p>
+
+<p>H - 24 小时制的小时; 如: &ldquo;00&rdquo; 至 &ldquo;23&rdquo;</p>
+
+<p>g - 12 小时制的小时，不足二位不补零; 如: &ldquo;1&rdquo; 至 12&rdquo;</p>
+
+<p>G - 24 小时制的小时，不足二位不补零; 如: &ldquo;0&rdquo; 至 &ldquo;23&rdquo;</p>
+
+<p>i - 分钟; 如: &ldquo;00&rdquo; 至 &ldquo;59&rdquo;</p>
+
+<p>j - 几日，二位数字，若不足二位不补零; 如: &ldquo;1&rdquo; 至 &ldquo;31&rdquo;</p>
+
+<p>l - 星期几，英文全名; 如: &ldquo;Friday&rdquo;</p>
+
+<p>m - 月份，二位数字，若不足二位则在前面补零; 如: &ldquo;01&rdquo; 至 &ldquo;12&rdquo;</p>
+
+<p>n - 月份，二位数字，若不足二位则不补零; 如: &ldquo;1&rdquo; 至 &ldquo;12&rdquo;</p>
+
+<p>M - 月份，三个英文字母; 如: &ldquo;Jan&rdquo;</p>
+
+<p>s - 秒; 如: &ldquo;00&rdquo; 至 &ldquo;59&rdquo;</p>
+
+<p>S - 字尾加英文序数，二个英文字母; 如: &ldquo;th&rdquo;，&rdquo;nd&rdquo;</p>
+
+<p>t - 指定月份的天数; 如: &ldquo;28&rdquo; 至 &ldquo;31&rdquo;</p>
+
+<p>U - 总秒数</p>
+
+<p>w - 数字型的星期几，如: &ldquo;0&rdquo; (星期日) 至 &ldquo;6&rdquo; (星期六)</p>
+
+<p>Y - 年，四位数字; 如: &ldquo;1999&rdquo;</p>
+
+<p>y - 年，二位数字; 如: &ldquo;99&rdquo;</p>
+
+<p>z - 一年中的第几天; 如: &ldquo;0&rdquo; 至 &ldquo;365&rdquo;</p>
 </article>
                 <section class="author">
                     
@@ -112,13 +141,13 @@ I'm ready for that, you know.
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/dns%e5%be%aa%e7%8e%af%e5%a4%8d%e7%94%a8.html">DNS循环复用</a>
+                        <a class="link" href="/js%e5%b0%81%e8%a3%85%e5%88%86%e9%a1%b5%e7%b1%bb.html">封装分页类</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/phpinfo%e4%b8%ad%e5%ad%98%e5%9c%a8cli%e6%a8%a1%e5%bc%8f%e4%b8%8b%e4%b8%8d%e5%ad%98%e5%9c%a8%e7%9a%84%e6%a8%a1%e5%9d%97.html">php -m 不存在的模块，phpinfo中存在</a>
+                        <a class="link" href="/%e9%93%be%e8%a1%a8%e7%9a%84%e9%80%86%e7%bd%ae.html">链表的逆置</a>
                     </section>
                     
                 </section>

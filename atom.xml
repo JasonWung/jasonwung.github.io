@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-04T22:26:32+08:00</updated>
+  <updated>2018-01-04T22:36:45+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
@@ -20,6 +20,13 @@
     <id>tag:www.jasonwung.com,2018-01-03:/2017-2018.html</id>
     <content type="html">&lt;h2&gt;关于新年的心得&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;转眼间，一年过去了，这一年发生了很多，离开了学校，走向了社会，也结束了实习生活，开始了一个上班族的日常生活。在毕业后的这半年里，很开心，很放肆，就这样过了半年，在跨年的时候，回望整个2017年，我发现，这半年我一直浮于世事, 未曾深刻的思考过未来应该怎么做？未来的路该怎么走？未来想成为什么样的人？也未曾思考过如何去继续和努力。&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/2017-2018.html"></link>
+  </entry>
+  <entry>
+    <title>DNS循环复用</title>
+    <updated>2018-01-03T15:33:00+08:00</updated>
+    <id>tag:www.jasonwung.com,2018-01-03:/dns循环复用.html</id>
+    <content type="html">&lt;p&gt;随着网站流量上升，服务的负载不堪重负。造成崩溃问题。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;对此，有两种解决方法，首先，第一种，升级服务器，购买更高的配置的服务器，这种方式简单易行，缺点是投资比较大，然后流量再次上升，就会面临同样的问题。另一种方法是采用集群技术。采用两台以上的服务器进行协同工作（集群系统中的服务器不一定非得是高性能的服务器，但是可以提供高性能的不停机服务，随着需求的增加，可以在集群追加服务器），集群的优点是高可靠性，和强大灵活的系统扩展能力。&lt;/p&gt;&#xA;</content>
+    <link href="http://www.jasonwung.com/dns循环复用.html"></link>
   </entry>
   <entry>
     <title>fis3上传错误</title>
@@ -69,12 +76,5 @@
     <id>tag:www.jasonwung.com,2016-08-03:/ubuntu16.04安装ftp.html</id>
     <content type="html">&lt;p&gt;Ubuntu16.04 安装ftp，根据依赖安装。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;安装vsftpd。&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/ubuntu16.04安装ftp.html"></link>
-  </entry>
-  <entry>
-    <title>php分页函数</title>
-    <updated>2016-08-01T15:27:00+08:00</updated>
-    <id>tag:www.jasonwung.com,2016-08-01:/php分页函数.html</id>
-    <content type="html">&lt;p&gt;方便开发过程中简单写简单的函数&lt;/p&gt;&#xA;</content>
-    <link href="http://www.jasonwung.com/php分页函数.html"></link>
   </entry>
 </feed>
