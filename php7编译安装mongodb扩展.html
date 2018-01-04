@@ -46,9 +46,9 @@
 
 
         <meta name="keywords" content="PHP,">
-        <meta name="description" content="php -m 不存在的模块，phpinfo中存在">
+        <meta name="description" content="php7编译安装mongodb扩展">
         <meta name="author" content="">
-        <title>php -m 不存在的模块，phpinfo中存在</title>
+        <title>php7编译安装mongodb扩展</title>
     </head>
     <body>
         <article class="container">
@@ -65,57 +65,38 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">php -m 不存在的模块，phpinfo中存在</h1>
+                <h1 class="title">php7编译安装mongodb扩展</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1474333800"><span class="from"></span></span>
+                    <span class="date" data-time="1474251780"><span class="from"></span></span>
                     
                     <span class="tags"><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
                 </section>
-                <article class="content"><p>安装composer中，提示缺少一些扩展，php -m查询，果然缺少，但是发现phpinfo中都有啊。</p>
+                <article class="content"><p>关于扩展安装这块的步骤，单纯记录，大佬忽略。</p>
 
-<p>卧槽！卧槽！卧槽！什么情况！</p>
+<p>首先要下载mongodb的php扩展。</p>
 
-<p>经过一番搜索，发现php cli模式下的配置文件和web下的配置文件不是一个（好low，才知道）。。。</p>
+<pre><code>wget https://pecl.php.net/get/mongodb-1.1.1.tgz  
 
-<p>php &ndash;ini 可以查看cli模式下的配置文件路径。</p>
+// 接着解压并进入该文件夹 
 
-<pre><code>root@ubuntu:/home/ubuntu# php --ini
-Configuration File (php.ini) Path: /etc/php/7.0/cli
-Loaded Configuration File:         (none)
-Scan for additional .ini files in: /etc/php/7.0/cli/conf.d
-Additional .ini files parsed:      (none)
+tar -zxvf ./mongodb-1.1.1.tgz &amp;&amp; cd mongodb-1.1.1
 </code></pre>
 
-<p>我猜测了一下，大致是说cli下的配置文件，是在/etc/php/7.0/cli目录下，但是下面那行的loaded Configuration File是none，说明没有啊，于是就在对应的目录下创建了文件。写了个空的php-cli.ini</p>
+<p>接着就直接和其他的编译扩展是一个类型了。</p>
 
-<p>再次php &ndash;ini发现loaded Configuration File有了！！！有了！！！</p>
+<pre><code>// 路径自己替换一下，找到自己的phpize 和php-config就好
 
-<p>but发现了一个事。报错。。</p>
+/usr/local/php7/bin/phpize &amp;&amp; ./configure --with-php-config=/usr/local/php7/bin/php-config
 
-<pre><code>PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/php7/ext/json.so' in Unknown on line 0
+// 然后把生成的mongodb.so复制到相应的位置。在php.ini中写入
+
+extension = mongodb.so;
 </code></pre>
 
-<p>先抱着试试看的态度php -m一下。。果然！！！没有！！！</p>
-
-<p>然后开始纠结新的问题。为啥会报错呢。。。</p>
-
-<p>采用了最古老的办法，复制问题，浏览器粘贴，在stackOverflow中发现了我想要的答案，过滤到大量无效（不认识）的英文，发现了我想要的答案。</p>
-
-<pre><code>Not sure what caused this, but make clean then restarting phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install solved this sort of problem.
-</code></pre>
-
-<p>就是上面这句话。他说他不懂咋回事，但是执行make clean然后接着编译别的插件一个流程就行了。</p>
-
-<p>虽然我也不懂，但是又抱着试试看的态度执行了一遍。</p>
-
-<p>可以用了！！！</p>
-
-<p>貌似好像是缓存的因素。</p>
-
-<p>以上文章仅是个人猜测和实验。如有错误~求指点！！！</p>
+<p>然后重启php-fpm。访问php_info，显示已经安装了相应的扩展。</p>
 </article>
                 <section class="author">
                     
@@ -126,13 +107,13 @@ Additional .ini files parsed:      (none)
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/fis3%e4%b8%8a%e4%bc%a0%e9%94%99%e8%af%af.html">fis3上传错误</a>
+                        <a class="link" href="/phpinfo%e4%b8%ad%e5%ad%98%e5%9c%a8cli%e6%a8%a1%e5%bc%8f%e4%b8%8b%e4%b8%8d%e5%ad%98%e5%9c%a8%e7%9a%84%e6%a8%a1%e5%9d%97.html">php -m 不存在的模块，phpinfo中存在</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/php7%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85mongodb%e6%89%a9%e5%b1%95.html">php7编译安装mongodb扩展</a>
+                        <a class="link" href="/yaf-nginx%e9%87%8d%e5%86%99%e8%a7%84%e5%88%99.html">yaf nginx重写规则</a>
                     </section>
                     
                 </section>

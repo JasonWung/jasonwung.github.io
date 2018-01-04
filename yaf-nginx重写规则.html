@@ -46,9 +46,9 @@
 
 
         <meta name="keywords" content="PHP,">
-        <meta name="description" content="php -m 不存在的模块，phpinfo中存在">
+        <meta name="description" content="yaf nginx重写规则">
         <meta name="author" content="">
-        <title>php -m 不存在的模块，phpinfo中存在</title>
+        <title>yaf nginx重写规则</title>
     </head>
     <body>
         <article class="container">
@@ -65,57 +65,69 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">php -m 不存在的模块，phpinfo中存在</h1>
+                <h1 class="title">yaf nginx重写规则</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1474333800"><span class="from"></span></span>
+                    <span class="date" data-time="1471501440"><span class="from"></span></span>
                     
                     <span class="tags"><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
                 </section>
-                <article class="content"><p>安装composer中，提示缺少一些扩展，php -m查询，果然缺少，但是发现phpinfo中都有啊。</p>
+                <article class="content"><p>最近在学习yaf，装上yaf后，正常访问路径出错。因为是404，所以确定是nginx的重写规则问题，在google、百度了之后，看到网上的很多教程说鸟哥的手册写错了。</p>
 
-<p>卧槽！卧槽！卧槽！什么情况！</p>
+<pre><code>if (!-e $request_filename) {
+    rewrite ^/(.*)  /index.php/$1 last;
+  }
 
-<p>经过一番搜索，发现php cli模式下的配置文件和web下的配置文件不是一个（好low，才知道）。。。</p>
+// 把index.php 后面的/ 换成 ？ 变成如下：
 
-<p>php &ndash;ini 可以查看cli模式下的配置文件路径。</p>
-
-<pre><code>root@ubuntu:/home/ubuntu# php --ini
-Configuration File (php.ini) Path: /etc/php/7.0/cli
-Loaded Configuration File:         (none)
-Scan for additional .ini files in: /etc/php/7.0/cli/conf.d
-Additional .ini files parsed:      (none)
+if (!-e $request_filename) {
+    rewrite ^/(.*)  /index.php?$1 last;
+}
 </code></pre>
 
-<p>我猜测了一下，大致是说cli下的配置文件，是在/etc/php/7.0/cli目录下，但是下面那行的loaded Configuration File是none，说明没有啊，于是就在对应的目录下创建了文件。写了个空的php-cli.ini</p>
+<p>尝试之后发现可以，因为公司用的重写规则就是 / 而不是 ？，更觉得不可能是鸟哥文档出错了呀。所以去查找了相关资料。</p>
 
-<p>再次php &ndash;ini发现loaded Configuration File有了！！！有了！！！</p>
+<p>发现，之所以使用url模式访问的时候，第一种的重写规则并没有起作用，也就是说访问的正常路径没有传到index.php（当然这是一种错误的思想，不过开始是这么想的）。接着又去查找资料，发现了tp的同样的重写规则的原理，发现tp是获取$_SERVER[&lsquo;PATH_INFO&rsquo;]这个变量。然后分割，然后去尝试在yaf下var_dump这个变量， NULL，果然出错，猜想或许yaf同样的用了同样的原理。于是搜索为什么没有这个变量，和nginx相关联后，发现$_SERVER这个服务器环境变量可以被nginx干预，也就是在nginx处理的时候，会从fastcgi传过来。接着搜索nginx的配置文件，发现了fastcgi的传到server的参数。</p>
 
-<p>but发现了一个事。报错。。</p>
+<pre><code>fastcgi_param  QUERY_STRING       $query_string;
+fastcgi_param  REQUEST_METHOD     $request_method;
+fastcgi_param  CONTENT_TYPE       $content_type;
+fastcgi_param  CONTENT_LENGTH     $content_length;
 
-<pre><code>PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/php7/ext/json.so' in Unknown on line 0
+fastcgi_param  SCRIPT_NAME        $fastcgi_script_name;
+fastcgi_param  REQUEST_URI        $request_uri;
+fastcgi_param  DOCUMENT_URI       $document_uri;
+fastcgi_param  DOCUMENT_ROOT      $document_root;
+fastcgi_param  SERVER_PROTOCOL    $server_protocol;
+fastcgi_param  REQUEST_SCHEME     $scheme;
+fastcgi_param  HTTPS              $https if_not_empty;
+
+fastcgi_param  GATEWAY_INTERFACE  CGI/1.1;
+fastcgi_param  SERVER_SOFTWARE    nginx/$nginx_version;
+
+fastcgi_param  REMOTE_ADDR        $remote_addr;
+fastcgi_param  REMOTE_PORT        $remote_port;
+fastcgi_param  SERVER_ADDR        $server_addr;
+fastcgi_param  SERVER_PORT        $server_port;
+fastcgi_param  SERVER_NAME        $server_name;
+
+# PHP only, required if PHP was built with --enable-force-cgi-redirect
+fastcgi_param  REDIRECT_STATUS    200;
 </code></pre>
 
-<p>先抱着试试看的态度php -m一下。。果然！！！没有！！！</p>
+<p>然后并没有发现PATH_INFO，所以基本上已经接近真相了。</p>
 
-<p>然后开始纠结新的问题。为啥会报错呢。。。</p>
+<p>然后去得到的现在的条件去查找，得到了下面的语句：</p>
 
-<p>采用了最古老的办法，复制问题，浏览器粘贴，在stackOverflow中发现了我想要的答案，过滤到大量无效（不认识）的英文，发现了我想要的答案。</p>
-
-<pre><code>Not sure what caused this, but make clean then restarting phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install solved this sort of problem.
+<pre><code>fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+set $path_info $fastcgi_path_info;
+fastcgi_param PATH_INFO       $path_info;
+try_files $fastcgi_script_name =404;
 </code></pre>
 
-<p>就是上面这句话。他说他不懂咋回事，但是执行make clean然后接着编译别的插件一个流程就行了。</p>
-
-<p>虽然我也不懂，但是又抱着试试看的态度执行了一遍。</p>
-
-<p>可以用了！！！</p>
-
-<p>貌似好像是缓存的因素。</p>
-
-<p>以上文章仅是个人猜测和实验。如有错误~求指点！！！</p>
+<p>构造path_info 并传过去。果然传过去之后，立刻就可以了。</p>
 </article>
                 <section class="author">
                     
@@ -124,16 +136,11 @@ Additional .ini files parsed:      (none)
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
+                    <section class="nav prev">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/fis3%e4%b8%8a%e4%bc%a0%e9%94%99%e8%af%af.html">fis3上传错误</a>
-                    </section>
-                    
-                    
-                    <section class="nav next more">
-                        <div class="head">下篇文章</div>
                         <a class="link" href="/php7%e7%bc%96%e8%af%91%e5%ae%89%e8%a3%85mongodb%e6%89%a9%e5%b1%95.html">php7编译安装mongodb扩展</a>
                     </section>
+                    
                     
                 </section>
                 
