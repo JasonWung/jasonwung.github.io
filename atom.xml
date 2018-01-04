@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-04T21:59:20+08:00</updated>
+  <updated>2018-01-04T22:00:47+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
@@ -25,7 +25,7 @@
     <title>fis3上传错误</title>
     <updated>2017-07-25T13:20:00+08:00</updated>
     <id>tag:www.jasonwung.com,2017-07-25:/fis3上传错误.html</id>
-    <content type="html">&lt;pre&gt;&lt;code&gt;/usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228 throw new Error(error.errmsg || error); fis3 上传文件报错&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&#xA;&lt;p&gt;在工作中开发，用fis3的上传工具，今天在上传过程中产生了一个错误，google之后和我遇到的情况不太一样，我这个情况有点特殊，可能之后有朋友可能会遇到，所以记录下来。&lt;/p&gt;&#xA;</content>
+    <content type="html">&lt;p&gt;在工作中开发，用fis3的上传工具，今天在上传过程中产生了一个错误，google之后和我遇到的情况不太一样，我这个情况有点特殊，可能之后有朋友可能会遇到，所以记录下来。&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/fis3上传错误.html"></link>
   </entry>
 </feed>
