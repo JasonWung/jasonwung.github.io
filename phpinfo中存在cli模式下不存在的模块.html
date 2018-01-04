@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="Fe,">
-        <meta name="description" content="fis3上传错误">
+        <meta name="keywords" content="PHP,">
+        <meta name="description" content="php -m 不存在的模块，phpinfo中存在">
         <meta name="author" content="">
-        <title>fis3上传错误</title>
+        <title>php -m 不存在的模块，phpinfo中存在</title>
     </head>
     <body>
         <article class="container">
@@ -65,43 +65,57 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">fis3上传错误</h1>
+                <h1 class="title">php -m 不存在的模块，phpinfo中存在</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1500960000"><span class="from"></span></span>
+                    <span class="date" data-time="1474333800"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Fe/index.html">Fe</a></span>
+                    <span class="tags"><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
                 </section>
-                <article class="content"><p>在工作中开发，用fis3的上传工具，今天在上传过程中产生了一个错误，google之后和我遇到的情况不太一样，我这个情况有点特殊，可能之后有朋友可能会遇到，所以记录下来。</p>
+                <article class="content"><p>安装composer中，提示缺少一些扩展，php -m查询，果然缺少，但是发现phpinfo中都有啊。</p>
 
-<pre><code>/usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228
-        throw new Error(error.errmsg || error);
-        ^
-Error: upload file [/actions/activity/v1/AcceptInvite.php] to [/home/homework/app/course] by receiver [http://test37.zuoyebang.cc/fisreceiver.php] error [500]
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:228:19
-at /usr/local/lib/node_modules/fis3/node_modules/fis3-deploy-http-push/index.js:26:11
-at IncomingMessage.&lt;anonymous&gt; (/usr/local/lib/node_modules/fis3/lib/util.js:1263:11)
-at emitNone (events.js:91:20)
-at IncomingMessage.emit (events.js:185:7)
-at endReadableNT (_stream_readable.js:974:12)
-at _combinedTickCallback (internal/process/next_tick.js:80:11)
-at process._tickCallback (internal/process/next_tick.js:104:9)
+<p>卧槽！卧槽！卧槽！什么情况！</p>
+
+<p>经过一番搜索，发现php cli模式下的配置文件和web下的配置文件不是一个（好low，才知道）。。。</p>
+
+<p>php &ndash;ini 可以查看cli模式下的配置文件路径。</p>
+
+<pre><code>root@ubuntu:/home/ubuntu# php --ini
+Configuration File (php.ini) Path: /etc/php/7.0/cli
+Loaded Configuration File:         (none)
+Scan for additional .ini files in: /etc/php/7.0/cli/conf.d
+Additional .ini files parsed:      (none)
 </code></pre>
 
-<p>遇到这个问题，http 提示状态码 是 500 ，这块首先看看服务器接收文件有没有问题，检查上传文件是否可访问，检查被上传文件目录是否有权限，如果这些都没问题，你可能遇到了和我同样的问题（这种概率不大</p>
+<p>我猜测了一下，大致是说cli下的配置文件，是在/etc/php/7.0/cli目录下，但是下面那行的loaded Configuration File是none，说明没有啊，于是就在对应的目录下创建了文件。写了个空的php-cli.ini</p>
 
-<pre><code>curl http://test.***.cc/fisreceiver.php
-I'm ready for that, you know.
+<p>再次php &ndash;ini发现loaded Configuration File有了！！！有了！！！</p>
+
+<p>but发现了一个事。报错。。</p>
+
+<pre><code>PHP Warning:  PHP Startup: Invalid library (maybe not a PHP library) '/usr/local/php7/ext/json.so' in Unknown on line 0
 </code></pre>
 
-<p>反馈是正常的，所以应该不是程序的问题，然后我去检查nginx的日志，发现没有日志，这就很奇怪了。</p>
+<p>先抱着试试看的态度php -m一下。。果然！！！没有！！！</p>
 
-<pre><code>df -h 
+<p>然后开始纠结新的问题。为啥会报错呢。。。</p>
+
+<p>采用了最古老的办法，复制问题，浏览器粘贴，在stackOverflow中发现了我想要的答案，过滤到大量无效（不认识）的英文，发现了我想要的答案。</p>
+
+<pre><code>Not sure what caused this, but make clean then restarting phpize &amp;&amp; ./configure &amp;&amp; make &amp;&amp; make install solved this sort of problem.
 </code></pre>
 
-<p>看了一下文件系统，满了。。。找到问题的关键了，所以遇到我得这种情况的概率很低，但是如果有朋友遇到这种情况，不妨考虑一下我这个解决思路。</p>
+<p>就是上面这句话。他说他不懂咋回事，但是执行make clean然后接着编译别的插件一个流程就行了。</p>
+
+<p>虽然我也不懂，但是又抱着试试看的态度执行了一遍。</p>
+
+<p>可以用了！！！</p>
+
+<p>貌似好像是缓存的因素。</p>
+
+<p>以上文章仅是个人猜测和实验。如有错误~求指点！！！</p>
 </article>
                 <section class="author">
                     
@@ -110,16 +124,11 @@ I'm ready for that, you know.
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
+                    <section class="nav prev">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/2017-2018.html">2017-2018</a>
+                        <a class="link" href="/fis3%e4%b8%8a%e4%bc%a0%e9%94%99%e8%af%af.html">fis3上传错误</a>
                     </section>
                     
-                    
-                    <section class="nav next more">
-                        <div class="head">下篇文章</div>
-                        <a class="link" href="/phpinfo%e4%b8%ad%e5%ad%98%e5%9c%a8cli%e6%a8%a1%e5%bc%8f%e4%b8%8b%e4%b8%8d%e5%ad%98%e5%9c%a8%e7%9a%84%e6%a8%a1%e5%9d%97.html">php -m 不存在的模块，phpinfo中存在</a>
-                    </section>
                     
                 </section>
                 
