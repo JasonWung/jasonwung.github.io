@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="">
-        <meta name="description" content="">
+        <meta name="keywords" content="Fe,">
+        <meta name="description" content="封装分页类">
         <meta name="author" content="">
-        <title></title>
+        <title>封装分页类</title>
     </head>
     <body>
         <article class="container">
@@ -65,16 +65,145 @@
 </header>
 
             <article class="main article">
-                <h1 class="title"></h1>
+                <h1 class="title">封装分页类</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="0"><span class="from"></span></span>
+                    <span class="date" data-time="1469175840"><span class="from"></span></span>
                     
-                    <span class="tags"></span>
+                    <span class="tags"><a class="tag" href="/tag/Fe/index.html">Fe</a></span>
                 </section>
-                <article class="content"></article>
+                <article class="content"><p>js封装分页类,第一次这么写，求指正</p>
+
+<pre><code>/*javascript 分页*/
+    (function(win, list){
+
+        win.page = {
+            _list : '',
+            pageCount   : 0,    // 所有数据的总数
+            singleNum   : 2,    // 每页显示的条数,默认为10
+            pageNum     : 0,    // 页数
+            currentPage : 1,
+            /**
+             * 初始化数据
+             */
+            init : function(){
+
+                this._list = this.toArray(list);
+                this.calculatePage();
+
+                this.getData();
+                this.pageClick();
+            },
+            /**
+             * 将传入的json对象转化为数组
+             * @param list
+             * @returns {Array}
+             */
+            toArray : function(list){
+                var listArr = new Array();
+
+                for (var i in list)
+                    listArr.push(list[i]);
+
+                return listArr;
+            },
+            /**
+             * 计算页码
+             * @returns {*}
+             */
+            calculatePage : function(){
+                this.pageCount = this._list.length;
+
+                if (this.pageCount == 0){
+                    return fales;
+                }
+
+                this.pageNum = Math.ceil(this.pageCount / this.singleNum);
+            },
+            /**
+             * 获取hash值中的页码
+             * @returns {Number}
+             */
+            gethash : function(){
+                return parseInt(window.location.hash.substr(2));
+            },
+            /**
+             * 分割要渲染的数据
+             */
+            getData : function(){
+                this.currentPage = this.gethash()?this.gethash():1;
+
+                if (this.currentPage &gt; this.pageNum){
+                    this.currentPage = this.pageNum;
+                }
+
+                var start   = (this.currentPage - 1) * this.singleNum;
+                var end     = this.currentPage * this.singleNum;
+
+                var renderData = this._list.slice(start, end);
+                this.renderPage(renderData);
+            },
+            /**
+             * 渲染数据到页面表格中
+             * @param data
+             */
+            renderPage : function (data) {
+                var str = '';
+                for(var i = 0; i &lt; data.length; i++){
+                    // '&lt;td&gt;'+data[i].scheme+'&lt;/td&gt;'+
+                    // '&lt;td&gt;'+data[i].http+'&lt;/td&gt;'+
+                    str +=  '&lt;tr&gt;&lt;td&gt;'+data[i].id+'&lt;/td&gt;'+
+                            '&lt;td&gt;'+data[i].name+'&lt;/td&gt;'+
+                            '&lt;td&gt;'+data[i].edit_time+'&lt;/td&gt;'+
+                            '&lt;td&gt;'+data[i].edit_user+'&lt;/td&gt;&lt;td&gt;';
+                    if(data[i].status == 0){
+                        str +=  '未发布&lt;/td&gt;&lt;td&gt;' +
+                                '&lt;a href=&quot;javascript:void(0)&quot; data-id=&quot;'+data[i].id+'&quot; data-status=&quot;1&quot; class=&quot;edit_status&quot;&gt;发布&lt;/a&gt;';
+                    }else{
+                        str +=  '已发布&lt;/td&gt;&lt;td&gt;' +
+                                '&lt;a href=&quot;javascript:void(0)&quot; data-id=&quot;'+data[i].id+'&quot; data-status=&quot;0&quot; class=&quot;edit_status&quot;&gt;下线&lt;/a&gt;';
+                    }
+                    str += '&amp;nbsp;&amp;nbsp;&lt;a href=&quot;/tv/bang/edit_subject.php?id='+data[i].id+'&quot;&gt;编辑&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;';
+                    $('#subject_list').html(str);
+                }
+                this.renderPageNum();
+                console.log(data);
+            },
+            /**
+             * 渲染底部页码
+             */
+            renderPageNum : function (){
+                if (this.pageNum == 1){
+                    return ;
+                }
+                var pageStr = '';
+                for (var j=1; j &lt;= this.pageNum; j++){
+                    if (j == this.currentPage){
+                        pageStr += '&lt;a href=&quot;javascript:void(0)&quot; class=&quot;current&quot;&gt;'+j+'&lt;/a&gt;';
+                    }else{
+                        pageStr += '&lt;a href=&quot;#p'+j+'&quot;&gt;'+j+'&lt;/a&gt;';
+                    }
+                }
+                $('.page_selector').html(pageStr);
+            },
+            /**
+             * 页码点击监控
+             */
+            pageClick : function (){
+                $('.page_selector a').live('click',function () {
+                    window.location.reload();
+                });
+            }
+
+        };
+        // var pageCount = list.length();
+
+        page.init();
+    })(window, window.subject_list);
+</code></pre>
+</article>
                 <section class="author">
                     
                     <a class="name" href="/about..html"></a>
