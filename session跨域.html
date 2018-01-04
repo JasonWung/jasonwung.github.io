@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="C,">
-        <meta name="description" content="链表的逆置">
+        <meta name="keywords" content="PHP,">
+        <meta name="description" content="session跨域共享session 二级域名之前的共享">
         <meta name="author" content="">
-        <title>链表的逆置</title>
+        <title>session跨域共享session 二级域名之前的共享</title>
     </head>
     <body>
         <article class="container">
@@ -65,97 +65,62 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">链表的逆置</h1>
+                <h1 class="title">session跨域共享session 二级域名之前的共享</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1460447040"><span class="from"></span></span>
+                    <span class="date" data-time="1459920120"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/C/index.html">C</a></span>
+                    <span class="tags"><a class="tag" href="/tag/PHP/index.html">PHP</a></span>
                 </section>
-                <article class="content"><p>创建单链表并逆置</p>
+                <article class="content"><p>最近做的项目里面有用到session 共享</p>
 
-<pre><code>//
-//  main.c
-//  newline
-//
-//  Created by Jason on 16/4/12.
-//  Copyright © 2016年 jason. All rights reserved.
-//
+<p>代码是这样的，session_start() 之前，写入这个代码。 将test.com 换成你的顶级域名，我在工作中，使用了thinkphp ，我在入口文件中加入了这三行代码，亲测可行，原生php写的demo也可以用，据说在thinkphp的config文件里写也可以（未测）：</p>
 
-#include &lt;stdio.h&gt;
-#include &quot;stdlib.h&quot;
-#define NULL 0
+<pre><code>ini_set('session.cookie_path', '/');
+ini_set('session.cookie_domain', 'test.com');
+ini_set('session.cookie_lifetime', '1800');
+</code></pre>
 
-struct node{
-    int data;
-    struct node *next;
-};
-struct node*create(struct node *L){
-   
-    int x, flg = 1;
-    struct node *p, *s;
-    L=(struct node *)malloc(sizeof(struct node)); //生成头结点
-    L-&gt;next = NULL;
-    p=L;
-    while(flg)    //循环接受输入节点数据，0结束输入
-    {
-        printf(&quot;请输入节点数据\n&quot;);
-        scanf(&quot;%d&quot;, &amp;x);
-        if(x != 0)
-        {
-            s=(struct node *)malloc(sizeof(struct node)); //生成新节点
-            s-&gt;data = x;
-            p-&gt;next = s;        //把新节点插入链表尾部
-            p = s;              //p指针再次指向尾节点
-        }
-        else
-        {
-            flg = 0;    //输入0，改变循环变量，不接受新节点
-        }
-        
-    }
-    p-&gt;next = NULL;
-    
-    puts(&quot;链表输入结束\n&quot;);
-    
-    return L;
-}
-void print_node(struct node *head){
-    struct node *tmp;
-    tmp = head-&gt;next;
-    while (tmp != NULL) {
-        printf(&quot;%d  &quot;, tmp-&gt;data);
-        tmp = tmp-&gt;next;
-    }
-}
-void reverse_node(struct node *head){
-    struct node *p1,*p2;
-    p1 = head-&gt;next;
-    head-&gt;next = NULL;
-    while (p1 != NULL) {
-        p2 = p1;
-        p1 = p1-&gt;next;
-        p2-&gt;next = head-&gt;next;
-        head-&gt;next = p2;
-    }
+<p>关于这个问题研究了一下，做个记录，方便大家查询：</p>
 
-}
-int main(int argc, const char * argv[]) {
-    
-    struct node *head;
-    head = NULL;
-    head=create(head);/*创建单链表*/
-    puts(&quot;\n所有链表:\n&quot;);
-    print_node(head);
-    puts(&quot;\n&quot;);
-    puts(&quot;链表逆置:\n&quot;);
-    reverse_node(head);
-    print_node(head);
-    return 0;
+<p>先说一下sessionid ,sessionid 是随机生成的，是服务器端session的文件名称。</p>
+
+<p>session 是保存在服务器端的文件，而会在客户端浏览器留下一个 sessionid ,方便区分用户，在使用的时候用本地的sessionid 去服务端寻找session文件。</p>
+
+<p>如果说有两个域名，让他们公用一个session文件，首先是，这个session文件，在同一个服务器上面，或者是能同时被两个域名下的程序访问到的地方。</p>
+
+<p>如果说上面的做到了，接下来就是本地浏览器了</p>
+
+<p>本地浏览器将sessionid 以cookie的形式存放。而cookie是以域名的形式区分的，所以只要让 cookie 以顶级域名的形式存放，这个顶级域名和这个顶级域名下的二级域名，都可以获取到这个sessionid。因为上面可以访问到session文件，所以自然拿到sessionid就可以获取到了session</p>
+
+<p>以开源中国为例，cookie 下面出现以顶级域名存放的session，则设置共享session成功；</p>
+
+<pre><code>ini_set('session.cookie_path', '/');
+ini_set('session.cookie_domain', '.test.com');
+ini_set('session.cookie_lifetime', '1800');
+
+$ret = array(
+    'name' =&gt; isset($_POST['name'])? $_POST['name'] : '',
+    'gender' =&gt; isset($_POST['gender'])? $_POST['gender'] : ''
+);
+
+$origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
+
+$allow_origin = array(
+    'http://www.test.com',
+    'http://aaa.test.com'
+);
+
+if(in_array($origin, $allow_origin)){
+    header('Access-Control-Allow-Origin:'.$origin);
+    header('Access-Control-Allow-Methods:POST');
+    header('Access-Control-Allow-Headers:x-requested-with,content-type');
 }
 </code></pre>
+
+<p>设置二级域名后，必然伴随着跨域问题，毕竟jsonp不是官方的解决方法</p>
 </article>
                 <section class="author">
                     
@@ -166,13 +131,13 @@ int main(int argc, const char * argv[]) {
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/date%e5%87%bd%e6%95%b0%e8%af%a6%e8%a7%a3.html">date函数详解</a>
+                        <a class="link" href="/%e9%93%be%e8%a1%a8%e7%9a%84%e9%80%86%e7%bd%ae.html">链表的逆置</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/session%e8%b7%a8%e5%9f%9f.html">session跨域共享session 二级域名之前的共享</a>
+                        <a class="link" href="/v2ex%e5%a4%a7%e7%89%9b%e7%9a%84%e6%8c%87%e7%82%b9.html">V2EX大牛的指点</a>
                     </section>
                     
                 </section>
