@@ -76,23 +76,19 @@
                 </section>
                 <article class="content"><p>对于喜欢vim的同学们，在写代码的时候可能遇到一些不是太方便的事情，例如创建一个文件，在正常的IDE中都会创建一个头注释，作为说明，这块在VIM也是可以实现的</p>
 
-<pre><code>&quot;SET Comment START
-autocmd BufNewFile *.php,*.js,*.cpp exec &quot;:call SetComment()&quot; |normal 10Go
-func SetComment()
-    if expand(&quot;%:e&quot;) == 'php'
-        call setline(1, &quot;&lt;?php&quot;)
-    elseif expand(&quot;%:e&quot;) == 'js'
-        call setline(1, '//JavaScript file')
-    elseif expand(&quot;%:e&quot;) == 'cpp'
-        call setline(1, '//C++ file')
-    endif
-    call append(1, '/**')
-    call append(2, ' * Create by YourName')
-    call append(3, ' * Mail: YourName@XXX.com')
-    call append(4, ' * Date: '.strftime(&quot;%Y-%m-%d&quot;))
-    call append(5, ' * Time: '.strftime(&quot;%H:%M:%S&quot;))
-    call append(6, ' */')
-&quot;    call append(7, '')
+<pre><code>autocmd BufNewFile *.php,*.sh exec &quot;:call SetFileHeader()&quot;
+func SetFileHeader()
+        if expand(&quot;%:e&quot;) == 'php'
+            call setline(1, &quot;&lt;?php&quot;)
+        elseif expand(&quot;%:e&quot;) == 'sh'
+            call setline(1, &quot;#bin/bash&quot;)
+        endif
+
+        call append(1, '/**')
+        call append(2, ' * User: jason@XXX.com')
+        call append(3, ' * Date: '.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;))
+        call append(4, ' * Desc: ')
+        call append(5, ' */')
 endfunc
 </code></pre>
 
