@@ -45,10 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="linux,">
-        <meta name="description" content="VIM 文件头注释">
+        <meta name="keywords" content="区块链,">
+        <meta name="description" content="关于比特币等虚拟货币以及相关区块链技术">
         <meta name="author" content="">
-        <title>VIM 文件头注释</title>
+        <title>关于比特币等虚拟货币以及相关区块链技术</title>
     </head>
     <body>
         <article class="container">
@@ -65,34 +65,28 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">VIM 文件头注释</h1>
+                <h1 class="title">关于比特币等虚拟货币以及相关区块链技术</h1>
                 <section class="info">
                     
                     
                     
-                    <span class="date" data-time="1515073800"><span class="from"></span></span>
+                    <span class="date" data-time="1515586680"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/linux/index.html">linux</a></span>
+                    <span class="tags"><a class="tag" href="/tag/%e5%8c%ba%e5%9d%97%e9%93%be/index.html">区块链</a></span>
                 </section>
-                <article class="content"><p>对于喜欢vim的同学们，在写代码的时候可能遇到一些不是太方便的事情，例如创建一个文件，在正常的IDE中都会创建一个头注释，作为说明，这块在VIM也是可以实现的</p>
+                <article class="content"><p>关于最近盛行的比特币等虚拟货币，起源于2008年，一个化名 Satoshi Nakamoto （中本聪）的人发明的，第一个比特币是2009年1月3日生成，流行起来是2010年的事，让大家都知道的是2017年，比特币由年初的1000美元，最高涨到了2万美元，自此，虚拟货币向一块大石头落入水中，激起了巨大的波澜，引起了全世界从政府到平民普遍的关注。</p>
 
-<pre><code>autocmd BufNewFile *.php,*.sh exec &quot;:call SetFileHeader()&quot;
-func SetFileHeader()
-        if expand(&quot;%:e&quot;) == 'php'
-            call setline(1, &quot;&lt;?php&quot;)
-        elseif expand(&quot;%:e&quot;) == 'sh'
-            call setline(1, &quot;#bin/bash&quot;)
-        endif
+<p>而比特币自09年上线以来全球范围内运行了8年的时间，支持过单笔1.5亿美金的单笔交易，而其网络结构是由上千个核心节点参与构成，没有任何中心节点和运维，这种去中心化的分布式记账系统是比特币也就是区块链的核心技术。</p>
 
-        call append(1, '/**')
-        call append(2, ' * User: jason@XXX.com')
-        call append(3, ' * Date: '.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;))
-        call append(4, ' * Desc: ')
-        call append(5, ' */')
-endfunc
-</code></pre>
+<p>说比特币是分布式的记账系统是因为，比特币在全球范围内拥有上千个节点组成，如果可以提供计算资源并运行比特币计算系统即可以成为节点，这类提供资源的人称之为矿工，而计算和保存区块链信息需要耗费能源的，为了弥补资源的耗费，中本聪提出了奖励比特币的概念，每次记账或产生新的区块都可以凭空给自己增加一定量的比特币，而这种操作被称为挖矿。</p>
 
-<p>在创建文件的时候支持三种类型，分别是php，js，cpp这三类，如果有需要可以自己行扩展.</p>
+<p>这时候你可能会想，既然是自己挖矿就可以增加比特币，那么我成为节点是不是就可以给你随便给自己增加比特币了？这是不可能的，根据比特币的技术架构区块链来看，所有存储区块链的信息是一条链式结构，如同数据结构中的链表一样，已经产生的不可修改，只能增加，每个区块由本次记账的信息和hash值构成并存储上个区块的hash值。如此一来如果我们更改区块内容则hash值发生变化，从而比特币系统认为这是个无效的节点。</p>
+
+<p>而比特币自2017年大火后，国内涌现出大批量的矿工，那么是不是很快就会将比特币挖完呢，中本聪定义了比特币的发放奖励，每四年减半一次，自08年开始是50个比特币，今年18年，所以目前是12.5个，也就是比特币会有发放完的时候，届时矿工们会通过记录交易信息来收取手续费来维系资源的消耗，因为如果没人记录用户交易信息则会交易没有生效，即无法将交易信息同步到世界上比特币的各个节点中，所以此操作是有一定的手续费，如果免费的话，可能没怎么有矿工帮助记录并同步信息。</p>
+
+<p>说到底比特币只是区块链下的一个产物，而区块链的技术应用不止虚拟货币，人们已经意识到去中心化的分布式记账本技术，对于当前开放多维化的商业网络意义重大，目前，区块链技术已经脱离开比特币，在包括金融、贸易、征信、物联网、共享经济等诸多 领域崭露头角。现在当人们提到“区块链”时，往往已经与比特币网络没有直接联系了，除非特别指出是承载比特币交易系统的“比特币区块链”。</p>
+
+<p>本文只是以比特币为例的虚拟货币和区块链的简单介绍，个人浅谈，如有错误欢迎指正。</p>
 </article>
                 <section class="author">
                     
@@ -101,15 +95,10 @@ endfunc
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev more">
-                        <div class="head">上篇文章</div>
-                        <a class="link" href="/btccoin.html">关于比特币等虚拟货币以及相关区块链技术</a>
-                    </section>
                     
-                    
-                    <section class="nav next more">
+                    <section class="nav next">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/2017-2018.html">2017-2018</a>
+                        <a class="link" href="/vim%e6%96%87%e4%bb%b6%e5%a4%b4%e6%b3%a8%e9%87%8a.html">VIM 文件头注释</a>
                     </section>
                     
                 </section>

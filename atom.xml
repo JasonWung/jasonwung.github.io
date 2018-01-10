@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-05T17:20:00+08:00</updated>
+  <updated>2018-01-10T20:20:17+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
     <name>JasonWung&#39;s Blog</name>
   </author>
+  <entry>
+    <title>关于比特币等虚拟货币以及相关区块链技术</title>
+    <updated>2018-01-10T20:18:00+08:00</updated>
+    <id>tag:www.jasonwung.com,2018-01-10:/btccoin.html</id>
+    <content type="html">&lt;p&gt;关于最近盛行的比特币等虚拟货币，起源于2008年，一个化名 Satoshi Nakamoto （中本聪）的人发明的，第一个比特币是2009年1月3日生成，流行起来是2010年的事，让大家都知道的是2017年，比特币由年初的1000美元，最高涨到了2万美元，自此，虚拟货币向一块大石头落入水中，激起了巨大的波澜，引起了全世界从政府到平民普遍的关注。&lt;/p&gt;&#xA;</content>
+    <link href="http://www.jasonwung.com/btccoin.html"></link>
+  </entry>
   <entry>
     <title>VIM 文件头注释</title>
     <updated>2018-01-04T21:50:00+08:00</updated>
@@ -69,12 +76,5 @@
     <id>tag:www.jasonwung.com,2016-08-11:/编译安装nginx.html</id>
     <content type="html">&lt;p&gt;在Ubuntu下编译安装nginx，首先去下载nginx的安装包。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;http://nginx.org/en/download.html&#34;&gt;http://nginx.org/en/download.html&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下载对应的压缩包后，解压。执行命令编译安装&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/编译安装nginx.html"></link>
-  </entry>
-  <entry>
-    <title>Ubuntu16.04 安装ftp</title>
-    <updated>2016-08-03T12:02:00+08:00</updated>
-    <id>tag:www.jasonwung.com,2016-08-03:/ubuntu16.04安装ftp.html</id>
-    <content type="html">&lt;p&gt;Ubuntu16.04 安装ftp，根据依赖安装。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;安装vsftpd。&lt;/p&gt;&#xA;</content>
-    <link href="http://www.jasonwung.com/ubuntu16.04安装ftp.html"></link>
   </entry>
 </feed>
