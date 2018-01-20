@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>JasonWung&#39;s Blog</title>
   <id>http://www.jasonwung.com</id>
-  <updated>2018-01-10T20:20:17+08:00</updated>
+  <updated>2018-01-20T21:43:12+08:00</updated>
   <subtitle>code Loser</subtitle>
   <link href="http://www.jasonwung.com"></link>
   <author>
     <name>JasonWung&#39;s Blog</name>
   </author>
+  <entry>
+    <title>KNN近邻算法</title>
+    <updated>2018-01-20T21:42:00+08:00</updated>
+    <id>tag:www.jasonwung.com,2018-01-20:/knn算法.html</id>
+    <content type="html">&lt;p&gt;KNN算法采用测量不同特征值质检的距离方法进行分类。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;工作原理：存在样本数据集合，也称之为训练样本集合，并且每个数据都存在标签，即我们知道样本集中每一数据与所属分类的对应关系，输入没有标签的新数据后，将新数据的每个特征与样本数据中对应的特征进行对比，然后算法提取出来样本集中最相似（最近邻）的分类标签，一般来说只选取前k个最相似的数据，即KNN中的K，通常K不大于20，最后选择K个数据中标签出现最多次的分类作为新数据的分类。&lt;/p&gt;&#xA;</content>
+    <link href="http://www.jasonwung.com/knn算法.html"></link>
+  </entry>
   <entry>
     <title>关于比特币等虚拟货币以及相关区块链技术</title>
     <updated>2018-01-10T20:18:00+08:00</updated>
@@ -69,12 +76,5 @@
     <id>tag:www.jasonwung.com,2016-08-12:/yaf安装.html</id>
     <content type="html">&lt;p&gt;安装yaf，yaf是鸟哥开发的一个扩展类型的php框架，框架是用c写的，所以性能会比一般的框架性能好一些。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;首先是下载&lt;/p&gt;&#xA;</content>
     <link href="http://www.jasonwung.com/yaf安装.html"></link>
-  </entry>
-  <entry>
-    <title>编译安装nginx</title>
-    <updated>2016-08-11T16:23:00+08:00</updated>
-    <id>tag:www.jasonwung.com,2016-08-11:/编译安装nginx.html</id>
-    <content type="html">&lt;p&gt;在Ubuntu下编译安装nginx，首先去下载nginx的安装包。&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;a href=&#34;http://nginx.org/en/download.html&#34;&gt;http://nginx.org/en/download.html&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;下载对应的压缩包后，解压。执行命令编译安装&lt;/p&gt;&#xA;</content>
-    <link href="http://www.jasonwung.com/编译安装nginx.html"></link>
   </entry>
 </feed>
