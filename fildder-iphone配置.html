@@ -45,9 +45,10 @@
 </script>
 
 
-        <meta name="keywords" content="你是想放手一搏,还是等到年华老去,心中充满遗憾,孤独地迈向黄泉路?">
-        <meta name="description" content="你是想放手一搏,还是等到年华老去,心中充满遗憾,孤独地迈向黄泉路?">
-        <title>JasonWung&#39;s Blog</title>
+        <meta name="keywords" content="Windows,抓包,">
+        <meta name="description" content="Fildder-iPhone配置">
+        <meta name="author" content="">
+        <title>Fildder-iPhone配置</title>
     </head>
     <body>
         <article class="container">
@@ -63,70 +64,54 @@
   </ul>
 </header>
 
-            <article class="main page">
-                <header class="header site">
+            <article class="main article">
+                <h1 class="title">Fildder-iPhone配置</h1>
+                <section class="info">
                     
-                        <img class="logo" src="/images/avatar.png" />
-                        <h1 class="tag">Windows</h1>
-                        <h2 class="tag-sub">2 篇文章</h2>
                     
-                </header>
-                <ul class="article-list">
                     
-                    <li class="article">
-                        <a class="title" href="/fildder-iphone%e9%85%8d%e7%bd%ae.html">Fildder-iPhone配置</a>
-                        
-                        <section class="preview content"><p>关于Fildder配合手机抓包，之前一直没有好好做整理，每次都莫名其妙的可行或者不可行，今天用了公司电脑做了一下配置，才了大致两个坑吧，记录一下。</p>
+                    <span class="date" data-time="1523281654"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Windows/index.html">Windows</a><a class="tag" href="/tag/%e6%8a%93%e5%8c%85/index.html">抓包</a></span>
+                </section>
+                <article class="content"><p>关于Fildder配合手机抓包，之前一直没有好好做整理，每次都莫名其妙的可行或者不可行，今天用了公司电脑做了一下配置，才了大致两个坑吧，记录一下。</p>
 
 <p>本次教程仅为windows状态下,iPhone手机上。</p>
-</section>
-                        <section class="info">
-                            
-                            
-                            
-                            <span class="date" data-time="1523281654"><span class="from"></span></span>
-                            
-                            <span class="tags">
-                            <a class="tag" href="/tag/Windows/index.html">Windows</a><a class="tag" href="/tag/%e6%8a%93%e5%8c%85/index.html">抓包</a>
-                            </span>
-                        </section>
-                    </li>
+
+<p>遇到的坑大致有两个情况，其他的随便到网上找个教程即可：</p>
+
+<pre><code>1、下载Fildder后无法安装证书到手机，无法访问Fildder证书下载页面，此时可以尝试pc自己是否可以访问下载页面，如果Pc可以，手机不可以，请检车一下是否防火墙打开了，拦截了Fildder的请求。
+
+2、下载安装证书后，抓不到https的请求，只显示tunnel的请求并且都是http的，或者https请求302，此时查看自己的证书是否信任，一般情况下安装后都是默认信任的，但是在设置-&gt;通用-&gt;关于本机-&gt;证书信任中选择打开Fildder的信任机制。
+</code></pre>
+
+<p>以上是对Fildder在Windows下的Https手机代理抓包的遇到的坑，如果对流程性质的不明朗，可以百度搜一下，如果有遇到此类问题的可以参考下。</p>
+</article>
+                <section class="author">
                     
-                    <li class="article">
-                        <a class="title" href="/win10-memory.html">win10内存优化</a>
-                        
-                        <section class="preview content"><p>在使用公司配置的电脑的时候，发现了一个问题：即使我很严格控制我开启的应用的时候，发现内存仍旧是接近满的状态，除了开启正常的微信，钉钉以外，仅仅只开启一个音乐软件，一个链接服务器的终端，一个浏览器，但是打开任务管理器查看内存发现依旧是满满内存。</p>
-</section>
-                        <section class="info">
-                            
-                            
-                            
-                            <span class="date" data-time="1523017320"><span class="from"></span></span>
-                            
-                            <span class="tags">
-                            <a class="tag" href="/tag/Windows/index.html">Windows</a>
-                            </span>
-                        </section>
-                    </li>
-                    
-					<li>
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						
-						<ins class="adsbygoogle"
-						     style="display:block"
-							      data-ad-client="ca-pub-4450750660823964"
-								       data-ad-slot="2776232038"
-									        data-ad-format="auto"></ins>
-											<script>
-											(adsbygoogle = window.adsbygoogle || []).push({});
-											</script>
-					</li>
-                </ul>
-                <section class="page-nav">
+                    <a class="name" href="/about..html"></a>
+                    <div class="intro"></div>
+                </section>
+                <section class="recommend">
                     
                     
+                    <section class="nav next">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/test.html"></a>
+                    </section>
                     
                 </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//username.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
             </article>
         </article>
         <footer class="footer">
@@ -140,6 +125,6 @@
 	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1271951632'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s13.cnzz.com/z_stat.php%3Fid%3D1271951632%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
 </footer>
 
+        <script src="/bundle/index.js"></script>
     </body>
-    <script src="/bundle/index.js"></script>
 </html>
